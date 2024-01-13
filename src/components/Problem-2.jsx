@@ -6,10 +6,8 @@ import ContactModal from "./Modal/ContactModal";
 import DetailsModal from "./Modal/DetailsModal";
 
 const Problem2 = () => {
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
     const [showDeatilsModal, setShowDeatilsModal] = useState(false);
-    const [page, setPage] = useState(1); // for pagination
+    // for pagination
     const navigate = useNavigate();
     const [modalData, setModalData] = useState({
         title: "",
@@ -35,16 +33,11 @@ const Problem2 = () => {
 
     // fetch data from api
     const fetchData = async (val) => {
-        setIsLoading(true);
-        setError(null);
         try {
-            const payload = {
-                page: page,
-            };
             let getUrl =
                 val === "Modal A"
-                    ? await AppService.getAllContactsReq(payload)
-                    : await AppService.getUSCountryReq(payload);
+                    ? await AppService.getAllContactsReq()
+                    : await AppService.getUSCountryReq();
 
             const res = getUrl;
             setModalData((prev) => ({
@@ -52,9 +45,8 @@ const Problem2 = () => {
                 data: res.data.results,
                 filterData: res.data.results,
             }));
-            setIsLoading(false);
         } catch (error) {
-            setError(error);
+            console.log(error);
         }
     };
 
@@ -141,8 +133,6 @@ const Problem2 = () => {
                     handleSerachChnage={handleSerachChnage}
                     handleModal={handleModal}
                     setModalData={setModalData}
-                    isLoading={isLoading}
-                    fetchData={fetchData}
                     handleDeatilsModal={handleDeatilsModal}
                 />
                 <DetailsModal

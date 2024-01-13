@@ -8,8 +8,6 @@ const ContactModal = ({
     modalData,
     handleModal,
     setModalData,
-    fetchData,
-    isLoading,
     handleDeatilsModal,
     handleSerachChnage,
 }) => {
@@ -22,21 +20,9 @@ const ContactModal = ({
         }
     };
 
-    const handleScroll = () => {
-        if (
-            window.innerHeight + document.documentElement.scrollTop !==
-                document.documentElement.offsetHeight ||
-            isLoading
-        ) {
-            return;
-        }
-        fetchData();
-    };
 
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [isLoading]);
+
+
 
     return (
         <Modal size="lg" centered show={show} onHide={handleClose}>
