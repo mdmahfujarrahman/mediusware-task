@@ -6,6 +6,7 @@ const Problem1 = () => {
     const [filterData, setFilterData] = useState([]);
     const [inputData, setInputData] = useState({ name: "", status: "" });
 
+    // handle click event
     const handleClick = (val) => {
         setShow(val);
         if (val === "all") {
@@ -18,6 +19,7 @@ const Problem1 = () => {
         setFilterData(newData);
     };
 
+    // handle form submit
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!inputData.name || !inputData.status)
@@ -29,12 +31,13 @@ const Problem1 = () => {
             status: "",
         });
     };
-
+    // hnadle input change and set input data to state
     const handleChange = (e) => {
         const { name, value } = e.target;
         setInputData((prev) => ({ ...prev, [name]: value }));
     };
 
+    // sort data by status
     const sortData = (array) => {
         const sortItem = array.sort((a, b) => {
             if (a.status.toLowerCase() === "active") return -1;
@@ -45,7 +48,6 @@ const Problem1 = () => {
         });
         return sortItem;
     };
-
 
     return (
         <div className="container">
